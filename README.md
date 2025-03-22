@@ -42,6 +42,7 @@ El sistema permitirá:
 
 ## 📌 **Entregables**
 ### 📄 **Documentación Técnica (PDF)**
+- 📌 **Documento [(ver en documento)](https://docs.google.com/document/d/1eY_bsObp8wG4zWmE2UljVSp5r55qOf6xx6RAI2U74Nk/edit?usp=sharing)**
 - 📌 **Mockups [(ver en figma)](https://www.figma.com/design/2Wtfx816WIgRy4sYhUV5k0/Prototipo-Proyecto-POO?node-id=0-1&t=oarsNN7FSrFsk9Kt-1)**
 - 📌 **Diagrama de Clases [(ver imagen)](docs/class-diagram.drawio.png) [(vista web)](https://drive.google.com/file/d/1ef5F9pC0PROyEv1OEEhRTNpccLwVn6hl/view?usp=sharing)**
 - 📌 **Diagrama Entidad-Relación [(ver imagen)](docs/er-diagram.drawio.png) [(vista web)](https://drive.google.com/file/d/1EACcjV1xd8rfHNl_C1pnl7CFUDz_-pUC/view?usp=sharing)**
