@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+//Atributos
 class User {
     private final UUID id;
     private String name;
@@ -63,6 +64,7 @@ class User {
     }
 }
 
+//Roles de un usuario
 enum Role {
     ADMIN, CLIENT, EMPLOYEE;
 }
@@ -160,7 +162,7 @@ abstract class Person implements Manageable {
                "\nDirección: " + address + "\nEstado: " + status;
     }
 }
-
+//Clase Client que extiende person
 class Client extends Person {
     public Client(UUID id, String name, String document, String type, String phone, String email, String address, User createdBy) {
         super(id, name, document, type, phone, email, address, createdBy);
