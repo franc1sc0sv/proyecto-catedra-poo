@@ -15,7 +15,7 @@ export const Button = ({
     <button
       type={type}
       onClick={handleOnClick}
-      className={`cursor-pointer bg-gradient-to-r from-cyan-400 to-blue-400 text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:scale-105 transition ${className}`}
+      className={`cursor-pointer bg-gradient-to-r from-cyan-400 to-blue-400 !text-white px-8 py-3 rounded-lg font-semibold shadow-lg hover:scale-105 transition ${className}`}
     >
       {children}
     </button>

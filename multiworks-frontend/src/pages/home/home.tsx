@@ -35,7 +35,9 @@ const Home: React.FC = () => {
           </p>
           <div className="flex justify-center">
             <Button>
-              <Link to="/register">Comienza Ahora</Link>
+              <Link className="!text-white" to="/register">
+                Comienza Ahora
+              </Link>
             </Button>
           </div>
         </div>

@@ -49,6 +49,12 @@ const Header: React.FC<HeaderProps> = ({
 
   const itemsLongMenu = [
     {
+      key: "Dashboard",
+      icon: <DashboardOutlined />,
+      label: "Dashboard",
+      to: "/dashboard",
+    },
+    {
       key: "Clients",
       icon: <UserOutlined />,
       label: "Clients",
@@ -78,7 +84,7 @@ const Header: React.FC<HeaderProps> = ({
             </Link>
           </div>
           {isAuthenticated && (
-            <div className="flex items-center gap-4 hidden md:flex">
+            <div className="flex items-center gap-4 md:flex text-gray-500">
               {itemsLongMenu.map((item) => (
                 <HeaderItem
                   key={item.key}
@@ -127,7 +133,7 @@ const HeaderItem = ({
   return (
     <Link
       to={to}
-      className="flex items-center gap-2 hover:text-cyan-500 hover:bg-gray-100 rounded-md p-2"
+      className="flex items-center gap-2 hover:!text-blue-500 hover:!bg-gray-100 rounded-md p-2 !text-gray-500 no-underline"
     >
       {icon}
       {label}
