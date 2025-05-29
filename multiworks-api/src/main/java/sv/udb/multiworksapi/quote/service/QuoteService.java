@@ -19,17 +19,17 @@ public class QuoteService {
     private final QuoteRepository repository;
 
     public QuoteResponse create(QuoteDto dto) {
-        var now = LocalDateTime.now();
+        if (dto.startDate() != null && dto.endDate() != null && !dto.startDate().isBefore(dto.endDate())) {
+            throw new IllegalArgumentException("La fecha de inicio debe ser anterior a la fecha de fin.");
+        }
 
         Quote quote = Quote.builder()
                 .clientId(dto.clientId())
                 .estimatedHours(dto.estimatedHours())
-                .startDate(dto.startDate())
-                .endDate(dto.endDate())
+                .startDate(dto.startDate() != null ? dto.startDate().atStartOfDay() : null)
+                .endDate(dto.endDate() != null ? dto.endDate().atStartOfDay() : null)
                 .additionalCosts(dto.additionalCosts() != null ? dto.additionalCosts() : 0.0)
-                .status(dto.status() != null ? dto.status() : QuoteStatus.EnProceso)
-                .createdAt(now)
-                .updatedAt(now)
+                .status(QuoteStatus.EnProceso)
                 .build();
 
         return toResponse(repository.save(quote));

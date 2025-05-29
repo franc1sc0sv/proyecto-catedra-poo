@@ -1,11 +1,11 @@
 import { QuoteStatus } from "../enums/quote-status.enum";
 
 export interface QuoteDto {
-  client_id: string;
-  estimated_hours?: number;
-  start_date?: string; // YYYY-MM-DD
-  end_date?: string; // YYYY-MM-DD
-  additional_costs?: number;
+  clientId: string;
+  estimatedHours?: number;
+  startDate?: string; // YYYY-MM-DD
+  endDate?: string; // YYYY-MM-DD
+  additionalCosts?: number;
   status?: QuoteStatus;
 }
 

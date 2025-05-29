@@ -49,7 +49,7 @@ CREATE TABLE quotes
 (
     id               UUID PRIMARY KEY                                                 DEFAULT gen_random_uuid(),
     client_id        UUID REFERENCES clients (id) ON DELETE CASCADE,
-    status           TEXT CHECK (status IN ('En proceso', 'Finalizada', 'Cancelada')) DEFAULT 'En proceso',
+    status           TEXT CHECK (status IN ('EnProceso', 'Finalizada', 'Cancelada')) DEFAULT 'En proceso',
     estimated_hours  INTEGER,
     start_date       DATE,
     end_date         DATE,
