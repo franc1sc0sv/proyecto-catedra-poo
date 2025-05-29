@@ -10,6 +10,7 @@ import EmployeeList from "../pages/employees/employees";
 import ClientList from "../pages/clients/clients";
 import QuoteList from "../pages/quotes/QuoteList";
 import QuoteDetail from "../pages/quotes/QuoteDetail";
+import AssignmentDetail from "../pages/assignments/AssignmentDetail";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +73,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute requireAuth={true}>
             <QuoteDetail />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/dashboard/assignments/:id",
+        element: (
+          <ProtectedRoute requireAuth={true}>
+            <AssignmentDetail />
           </ProtectedRoute>
         ),
       },

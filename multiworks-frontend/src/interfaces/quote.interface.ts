@@ -11,6 +11,6 @@ export interface QuoteDto {
 
 export interface QuoteResponse extends QuoteDto {
   id: string;
-  created_at: string;
-  updated_at?: string;
+  createdAt: string;
+  updatedAt?: string;
 }

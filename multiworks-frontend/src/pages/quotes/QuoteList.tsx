@@ -143,7 +143,11 @@ const QuoteList: React.FC = () => {
         let color = "blue";
         if (status === QuoteStatus.Finalizada) color = "green";
         if (status === QuoteStatus.Cancelada) color = "red";
-        return <Tag color={color}>{status}</Tag>;
+        return (
+          <Tag color={color}>
+            {status === QuoteStatus.EnProceso ? "En proceso" : status}
+          </Tag>
+        );
       },
     },
     {

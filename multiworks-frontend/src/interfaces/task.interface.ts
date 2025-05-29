@@ -5,7 +5,7 @@ export interface TaskDto {
 
 export interface TaskResponse extends TaskDto {
   id: string;
-  assignment_id: string;
-  created_at: string;
-  updated_at?: string;
+  assignmentId: string;
+  createdAt: string;
+  updatedAt?: string;
 }

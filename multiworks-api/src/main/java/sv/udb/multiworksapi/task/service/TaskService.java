@@ -23,7 +23,6 @@ public class TaskService {
                 .title(dto.title())
                 .description(dto.description())
                 .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
 
         return toResponse(repository.save(task));

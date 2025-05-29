@@ -32,7 +32,7 @@ public class AuthService {
         if (userRepository.findByEmail(dto.getEmail()).isPresent()) {
             throw new FieldValidationException("email", "El correo ya está registrado");
         }
-        
+
         User user = User.builder()
                 .name(dto.getName())
                 .email(dto.getEmail())

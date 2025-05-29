@@ -18,7 +18,9 @@ public class AssignmentService {
     private final AssignmentRepository repository;
 
     public AssignmentResponse create(UUID quoteId, AssignmentDto dto) {
-        var now = LocalDateTime.now();
+        if (dto.endDatetime().isBefore(dto.startDatetime()) || dto.endDatetime().isEqual(dto.startDatetime())) {
+            throw new IllegalArgumentException("La fecha de fin debe ser posterior a la fecha de inicio.");
+        }
 
         Assignment assignment = Assignment.builder()
                 .quoteId(quoteId)
@@ -29,8 +31,7 @@ public class AssignmentService {
                 .estimatedHours(dto.estimatedHours())
                 .baseCost(dto.baseCost())
                 .extraPercentage(dto.extraPercentage())
-                .createdAt(now)
-                .updatedAt(now)
+                .createdAt(LocalDateTime.now())
                 .build();
 
         return toResponse(repository.save(assignment));

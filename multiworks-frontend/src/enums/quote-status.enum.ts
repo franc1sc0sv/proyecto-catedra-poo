@@ -1,5 +1,5 @@
 export enum QuoteStatus {
-  EnProceso = "En proceso",
+  EnProceso = "EnProceso",
   Finalizada = "Finalizada",
   Cancelada = "Cancelada",
 }

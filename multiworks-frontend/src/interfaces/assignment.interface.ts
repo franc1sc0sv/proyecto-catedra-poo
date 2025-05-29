@@ -1,16 +1,16 @@
 export interface AssignmentDto {
-  employee_id: string;
+  employeeId: string;
   title: string;
-  start_datetime: string; // ISO 8601
-  end_datetime: string; // ISO 8601
-  estimated_hours?: number;
-  base_cost?: number;
-  extra_percentage?: number;
+  startDatetime: string; // ISO 8601
+  endDatetime: string; // ISO 8601
+  estimatedHours: number;
+  baseCost: number;
+  extraPercentage: number;
 }
 
 export interface AssignmentResponse extends AssignmentDto {
   id: string;
-  quote_id: string;
-  created_at: string;
-  updated_at?: string;
+  quoteId: string;
+  createdAt: string;
+  updatedAt?: string;
 }

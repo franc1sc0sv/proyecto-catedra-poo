@@ -30,6 +30,7 @@ public class QuoteService {
                 .endDate(dto.endDate() != null ? dto.endDate().atStartOfDay() : null)
                 .additionalCosts(dto.additionalCosts() != null ? dto.additionalCosts() : 0.0)
                 .status(QuoteStatus.EnProceso)
+                .createdAt(LocalDateTime.now())
                 .build();
 
         return toResponse(repository.save(quote));
