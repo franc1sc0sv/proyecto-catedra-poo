@@ -6,6 +6,8 @@ import Login from "../pages/auth/login";
 import Home from "../pages/home/home";
 import Dashboard from "../pages/dashboard/dashboard";
 import Register from "../pages/auth/register";
+import EmployeeList from "../pages/employees/employees";
+import ClientList from "../pages/clients/clients";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +38,22 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute requireAuth={true}>
             <Dashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/employees",
+        element: (
+          <ProtectedRoute requireAuth={true}>
+            <EmployeeList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/clients",
+        element: (
+          <ProtectedRoute requireAuth={true}>
+            <ClientList />
           </ProtectedRoute>
         ),
       },
