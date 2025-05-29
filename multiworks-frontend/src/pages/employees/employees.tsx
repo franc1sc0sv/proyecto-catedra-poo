@@ -88,9 +88,11 @@ const EmployeeList: React.FC = () => {
       // Aquí deberías usar tu función getAllEmployees del API
       const response = await getAllEmployees();
       setEmployees(
-        response.data.sort((a, b) =>
-          a.deactivatedAt.localeCompare(b.deactivatedAt)
-        )
+        response.data.sort((a, b) => {
+          if (a?.deactivatedAt && !b?.deactivatedAt) return 1;
+          if (!a?.deactivatedAt && b?.deactivatedAt) return -1;
+          return 0;
+        })
       );
     } catch (error) {
       const err = error as AxiosError;
