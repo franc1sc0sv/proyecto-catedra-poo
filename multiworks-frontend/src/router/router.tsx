@@ -8,6 +8,7 @@ import Dashboard from "../pages/dashboard/dashboard";
 import Register from "../pages/auth/register";
 import EmployeeList from "../pages/employees/employees";
 import ClientList from "../pages/clients/clients";
+import QuoteList from "../pages/quotes/QuoteList";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,14 @@ export const router = createBrowserRouter([
         element: (
           <ProtectedRoute requireAuth={true}>
             <ClientList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/quotes",
+        element: (
+          <ProtectedRoute requireAuth={true}>
+            <QuoteList />
           </ProtectedRoute>
         ),
       },
