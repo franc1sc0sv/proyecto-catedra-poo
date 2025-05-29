@@ -1,61 +1,81 @@
+
+-- Tabla de usuarios del sistema (sin manejo de roles)
 CREATE TABLE users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(150) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    role TEXT CHECK (role IN ('ADMIN', 'CLIENT', 'EMPLOYEE')) NOT NULL,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL
+    updated_at TIMESTAMP
 );
 
-CREATE TABLE persons (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    name VARCHAR(100) NOT NULL,
-    document VARCHAR(50) UNIQUE NOT NULL,
-    person_type TEXT CHECK (person_type IN ('Natural', 'Legal')) NOT NULL,
-    phone VARCHAR(20) NULL,
-    email VARCHAR(150) UNIQUE NOT NULL,
-    address VARCHAR(255) NULL,
-    status TEXT CHECK (status IN ('Active', 'Inactive')) DEFAULT 'Active',
-    created_by UUID NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL,
-    deactivated_at TIMESTAMP NULL,
-    CONSTRAINT fk_persons_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL
-);
-
+-- Tabla de clientes
 CREATE TABLE clients (
-    id UUID PRIMARY KEY,
-    CONSTRAINT fk_clients_persons FOREIGN KEY (id) REFERENCES persons(id) ON DELETE CASCADE
-);
-
-CREATE TABLE employees (
-    id UUID PRIMARY KEY,
-    contract_type TEXT CHECK (contract_type IN ('Permanent', 'Temporary')) NOT NULL,
-    CONSTRAINT fk_employees_persons FOREIGN KEY (id) REFERENCES persons(id) ON DELETE CASCADE
-);
-
-CREATE TABLE quotations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    client_id UUID NOT NULL,
-    status TEXT CHECK (status IN ('In Progress', 'Completed')) DEFAULT 'In Progress',
-    tentative_start_date DATE NOT NULL,
-    tentative_end_date DATE NOT NULL,
-    total_cost DECIMAL(10,2) DEFAULT 0.00,
-    CONSTRAINT fk_quotations_clients FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
+    name TEXT NOT NULL,
+    document TEXT UNIQUE NOT NULL,
+    person_type TEXT CHECK (person_type IN ('Natural', 'Jurídica')) NOT NULL,
+    phone TEXT,
+    email TEXT,
+    address TEXT,
+    status TEXT CHECK (status IN ('Activo', 'Inactivo')) DEFAULT 'Activo',
+    created_by UUID REFERENCES users(id) ON DELETE SET NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP,
+    deactivated_at TIMESTAMP
 );
 
+-- Tabla de empleados
+CREATE TABLE employees (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name TEXT NOT NULL,
+    document TEXT UNIQUE NOT NULL,
+    person_type TEXT CHECK (person_type IN ('Natural', 'Jurídica')) NOT NULL,
+    contract_type TEXT CHECK (contract_type IN ('Permanente', 'Por Horas')) NOT NULL,
+    phone TEXT,
+    email TEXT,
+    address TEXT,
+    status TEXT CHECK (status IN ('Activo', 'Inactivo')) DEFAULT 'Activo',
+    created_by UUID REFERENCES users(id) ON DELETE SET NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP,
+    deactivated_at TIMESTAMP
+);
+
+-- Tabla de cotizaciones
+CREATE TABLE quotes (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    client_id UUID REFERENCES clients(id) ON DELETE CASCADE,
+    status TEXT CHECK (status IN ('En proceso', 'Finalizada', 'Cancelada')) DEFAULT 'En proceso',
+    estimated_hours INTEGER,
+    start_date DATE,
+    end_date DATE,
+    additional_costs NUMERIC DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+-- Tabla de asignaciones a cotizaciones
 CREATE TABLE assignments (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    quotation_id UUID NOT NULL,
-    employee_id UUID NOT NULL,
-    area VARCHAR(100) NOT NULL,
-    hourly_cost DECIMAL(10,2) NOT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
-    estimated_hours INT NOT NULL CHECK (estimated_hours > 0),
-    base_cost DECIMAL(10,2) NOT NULL,
-    extra_increment DECIMAL(5,2) DEFAULT 0.00,
-    CONSTRAINT fk_assignments_quotations FOREIGN KEY (quotation_id) REFERENCES quotations(id) ON DELETE CASCADE,
-    CONSTRAINT fk_assignments_employees FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE CASCADE
+    quote_id UUID REFERENCES quotes(id) ON DELETE CASCADE,
+    employee_id UUID REFERENCES employees(id) ON DELETE SET NULL,
+    title TEXT NOT NULL,
+    start_datetime TIMESTAMP,
+    end_datetime TIMESTAMP,
+    estimated_hours INTEGER,
+    base_cost NUMERIC,
+    extra_percentage NUMERIC,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP
+);
+
+-- Tabla de tareas/subactividades asociadas a una asignación
+CREATE TABLE tasks (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    assignment_id UUID REFERENCES assignments(id) ON DELETE CASCADE,
+    title TEXT NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP
 );
