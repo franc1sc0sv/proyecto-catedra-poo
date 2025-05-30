@@ -5,8 +5,8 @@ import type { Status } from "../enums/status.enum";
 export interface EmployeeDto {
   name: string;
   document: string;
-  person_type: PersonType;
-  contract_type: ContractType;
+  personType: PersonType;
+  contractType: ContractType;
   phone: string;
   email: string;
   address: string;
@@ -15,7 +15,8 @@ export interface EmployeeDto {
 
 export interface EmployeeResponse extends EmployeeDto {
   id: string;
-  created_at: string;
-  updated_at: string;
-  deactivated_at: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+  deactivatedAt: string;
 }

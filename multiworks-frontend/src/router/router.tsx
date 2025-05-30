@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/employees",
+        path: "/dashboard/employees",
         element: (
           <ProtectedRoute requireAuth={true}>
             <EmployeeList />
@@ -51,7 +51,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/clients",
+        path: "/dashboard/clients",
         element: (
           <ProtectedRoute requireAuth={true}>
             <ClientList />
@@ -59,7 +59,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/quotes",
+        path: "/dashboard/quotes",
         element: (
           <ProtectedRoute requireAuth={true}>
             <QuoteList />

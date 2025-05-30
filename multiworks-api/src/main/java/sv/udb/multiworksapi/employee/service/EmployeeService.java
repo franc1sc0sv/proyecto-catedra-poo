@@ -6,6 +6,7 @@ import sv.udb.multiworksapi.common.exceptions.FieldValidationException;
 import sv.udb.multiworksapi.employee.dto.EmployeeDto;
 import sv.udb.multiworksapi.employee.dto.EmployeeResponse;
 import sv.udb.multiworksapi.entity.Employee;
+import sv.udb.multiworksapi.enums.ContractType;
 import sv.udb.multiworksapi.enums.Status;
 import sv.udb.multiworksapi.repository.EmployeeRepository;
 

@@ -30,15 +30,15 @@ CREATE TABLE clients
 CREATE TABLE employees
 (
     id             UUID PRIMARY KEY                              DEFAULT gen_random_uuid(),
-    name           TEXT                                                      NOT NULL,
-    document       TEXT UNIQUE                                               NOT NULL,
-    person_type    TEXT CHECK (person_type IN ('Natural', 'Jurídica'))       NOT NULL,
-    contract_type  TEXT CHECK (contract_type IN ('Permanente', 'Por Horas')) NOT NULL,
+    name           TEXT                                                     NOT NULL,
+    document       TEXT UNIQUE                                              NOT NULL,
+    person_type    TEXT CHECK (person_type IN ('Natural', 'Jurídica'))      NOT NULL,
+    contract_type  TEXT CHECK (contract_type IN ('Permanente', 'PorHoras')) NOT NULL,
     phone          TEXT,
     email          TEXT,
     address        TEXT,
     status         TEXT CHECK (status IN ('Activo', 'Inactivo')) DEFAULT 'Activo',
-    created_by     UUID                                                      REFERENCES users (id) ON DELETE SET NULL,
+    created_by     UUID                                                     REFERENCES users (id) ON DELETE SET NULL,
     created_at     TIMESTAMP                                     DEFAULT CURRENT_TIMESTAMP,
     updated_at     TIMESTAMP,
     deactivated_at TIMESTAMP

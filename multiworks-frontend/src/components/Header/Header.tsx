@@ -5,6 +5,7 @@ import {
   LogoutOutlined,
   DashboardOutlined,
   HomeOutlined,
+  FileTextOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Button } from "../Buttons/Button";
@@ -46,6 +47,27 @@ const Header: React.FC<HeaderProps> = ({
     },
   ];
 
+  const itemsLongMenu = [
+    {
+      key: "Clients",
+      icon: <UserOutlined />,
+      label: "Clients",
+      to: "/dashboard/clients",
+    },
+    {
+      key: "Employees",
+      icon: <UserOutlined />,
+      label: "Employees",
+      to: "/dashboard/employees",
+    },
+    {
+      key: "Quotes",
+      icon: <FileTextOutlined />,
+      label: "Quotes",
+      to: "/dashboard/quotes",
+    },
+  ];
+
   return (
     <header className="bg-white shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,6 +77,18 @@ const Header: React.FC<HeaderProps> = ({
               HyperClass
             </Link>
           </div>
+          {isAuthenticated && (
+            <div className="flex items-center gap-4 hidden md:flex">
+              {itemsLongMenu.map((item) => (
+                <HeaderItem
+                  key={item.key}
+                  label={item.label}
+                  icon={item.icon}
+                  to={item.to}
+                />
+              ))}
+            </div>
+          )}
 
           <div className="flex items-center space-x-4">
             {isAuthenticated ? (
@@ -78,6 +112,26 @@ const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
     </header>
+  );
+};
+
+const HeaderItem = ({
+  label,
+  icon,
+  to,
+}: {
+  label: string;
+  icon: React.ReactNode;
+  to: string;
+}) => {
+  return (
+    <Link
+      to={to}
+      className="flex items-center gap-2 hover:text-cyan-500 hover:bg-gray-100 rounded-md p-2"
+    >
+      {icon}
+      {label}
+    </Link>
   );
 };
 

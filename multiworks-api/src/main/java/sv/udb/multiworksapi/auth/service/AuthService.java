@@ -39,8 +39,6 @@ public class AuthService {
                 .name(dto.getName())
                 .email(dto.getEmail())
                 .password(passwordEncoder.encode(dto.getPassword()))
-                .createdAt(now)
-                .updatedAt(now)
                 .build();
 
         userRepository.save(user);
